@@ -96,8 +96,8 @@ class Module implements
     {
         /* @var $cli \Symfony\Component\Console\Application */
         $cli            = $event->getTarget();
-        /* @var $serviceLocator \Zend\ServiceManager\ServiceLocatorInterface */
-        $serviceLocator = $event->getParam('ServiceManager');
+        /* @var $container \Interop\Container\ContainerInterface */
+        $container = $event->getParam('ServiceManager');
 
         $commands = array(
             'doctrine.dbal_cmd.runsql',
@@ -134,10 +134,10 @@ class Module implements
             );
         }
 
-        $cli->addCommands(array_map(array($serviceLocator, 'get'), $commands));
+        $cli->addCommands(array_map(array($container, 'get'), $commands));
 
         /* @var $entityManager \Doctrine\ORM\EntityManager */
-        $entityManager = $serviceLocator->get('doctrine.entitymanager.orm_default');
+        $entityManager = $container->get('doctrine.entitymanager.orm_default');
         $helperSet     = $cli->getHelperSet();
 
         if (class_exists('Symfony\Component\Console\Helper\QuestionHelper')) {
