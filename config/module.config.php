@@ -17,6 +17,8 @@
  * <http://www.doctrine-project.org>.
  */
 
+use Zend\Router\Http\Literal;
+
 return array(
     'doctrine' => array(
         'connection' => array(
@@ -257,7 +259,7 @@ return array(
     'router' => array(
         'routes' => array(
             'doctrine_orm_module_yuml' => array(
-                'type' => 'Zend\\Mvc\\Router\\Http\\Literal',
+                'type' => Literal::class,
                 'options' => array(
                     'route' => '/ocra_service_manager_yuml',
                     'defaults' => array(
